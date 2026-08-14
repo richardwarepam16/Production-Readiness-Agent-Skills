@@ -15,10 +15,14 @@ doesn't exist for the emails you're already collecting.
 
 ## Quick start
 
+From inside your project:
+
 ```bash
-git clone https://github.com/YOUR-USERNAME/preflight
-cp -r preflight/skills/* your-project/.claude/skills/     # Claude Code
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add
 ```
+
+It asks which agent you use (Claude Code, Cursor, GitHub Copilot, or Windsurf/Cline/other) and
+drops the skills in the right place. Non-interactive: `--target claude|cursor|copilot|agents`.
 
 Then, in your agent:
 
@@ -26,7 +30,7 @@ Then, in your agent:
 Run a preflight audit on this codebase.
 ```
 
-See [INSTALL.md](INSTALL.md) for GitHub Copilot, Cursor, Windsurf, and generic setups.
+See [INSTALL.md](INSTALL.md) for manual installs, CLI flags, and per-agent details.
 
 ## What it checks
 

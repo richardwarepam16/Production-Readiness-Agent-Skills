@@ -1,0 +1,30 @@
+{
+  "name": "production-readiness-agent-skills",
+  "version": "1.0.0",
+  "description": "Agent skills that audit your app for security, privacy, and legal problems before you ship it.",
+  "bin": {
+    "preflight": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "shared",
+    "checklists"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/richardwarepam16/Production-Readiness-Agent-Skills.git"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "agent-skills",
+    "security",
+    "audit",
+    "pre-launch"
+  ]
+}

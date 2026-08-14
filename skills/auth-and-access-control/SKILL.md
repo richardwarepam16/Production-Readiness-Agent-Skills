@@ -140,8 +140,9 @@ These are where the interesting bugs live, because they are written once and rar
 If the codebase implements its own session/password/token handling rather than using a
 maintained library, that is a finding on its own (**P1** minimum, **P0** if you find a
 concrete flaw). Recommend the ecosystem standard — Auth.js/NextAuth, Clerk, Supabase Auth,
-Lucia, Devise, Django auth, Spring Security. The cost of migrating before launch is a day.
-After launch it's a migration with live sessions.
+Devise, Django auth, Spring Security. (Lucia was deprecated by its maintainer in 2025 in favour
+of copying its guide into your own code — don't recommend installing it as a dependency.) The
+cost of migrating before launch is a day. After launch it's a migration with live sessions.
 
 ## How to verify a fix
 

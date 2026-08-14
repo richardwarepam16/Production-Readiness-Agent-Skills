@@ -10,13 +10,41 @@ wrapper is incidental.
 
 ---
 
+## Quick install (recommended)
+
+One command, run from inside your project — no clone, no npm publish, nothing to install
+globally:
+
+```bash
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add
+```
+
+It prompts for which agent you use and copies the skills (plus `shared/`, which the
+orchestrator needs) to the right place automatically. Flags for non-interactive use:
+
+```bash
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add --target claude   # or cursor | copilot | agents | all
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add --target claude --dest ../other-project
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add --target claude --force   # overwrite existing files
+npx github:richardwarepam16/Production-Readiness-Agent-Skills add --yes             # non-interactive, defaults to claude
+```
+
+Re-running is safe — existing files are skipped unless `--force` is passed, and `AGENTS.md` is
+appended to (once) rather than overwritten.
+
+The sections below are the manual, no-CLI equivalent — useful if you want to see exactly what
+gets copied, or need a rename the CLI doesn't do.
+
+---
+
 ## Claude Code / Claude Cowork
 
 Skills load from `.claude/skills/` in the project, or `~/.claude/skills/` for every project.
 
 ```bash
 mkdir -p .claude/skills
-cp -r preflight/skills/* .claude/skills/
+cp -r Production-Readiness-Agent-Skills/skills/* .claude/skills/
+cp -r Production-Readiness-Agent-Skills/shared shared   # preflight-audit reads shared/*.md
 ```
 
 Then just ask:
@@ -40,16 +68,25 @@ into `~/.claude/skills/`, or wire it into your plugin marketplace if you run one
 Copilot reads repo-wide instructions from `.github/copilot-instructions.md` and path-scoped
 instructions from `.github/instructions/*.instructions.md`.
 
+Either approach below reads skill files by path, so copy the whole folder in first (this
+includes `shared/`, which `preflight-audit` needs):
+
+```bash
+cp -r Production-Readiness-Agent-Skills /path/to/your-project/
+```
+
 **Repo-wide pointer** — `.github/copilot-instructions.md`:
 
 ```markdown
 ## Pre-production review
 
-This repo carries a security, privacy, and legal audit checklist in `preflight/skills/`.
+This repo carries a security, privacy, and legal audit checklist in
+`Production-Readiness-Agent-Skills/skills/`.
 
 When the user asks about deploying, shipping, launching, security, API keys, rate limits,
-privacy, GDPR, or whether the app is production-ready, read `preflight/skills/preflight-audit/SKILL.md`
-first and follow it. It routes to the specialist checks.
+privacy, GDPR, or whether the app is production-ready, read
+`Production-Readiness-Agent-Skills/skills/preflight-audit/SKILL.md` first and follow it. It
+routes to the specialist checks.
 
 Never report a finding without a file:line reference. Never claim the app is secure or
 compliant — report what was checked and what was found.
@@ -61,8 +98,9 @@ compliant — report what was checked and what was found.
 ---
 applyTo: "**/api/**,**/routes/**,**/server/**"
 ---
-Follow preflight/skills/auth-and-access-control/SKILL.md and
-preflight/skills/api-abuse-and-rate-limits/SKILL.md when writing or reviewing endpoints.
+Follow Production-Readiness-Agent-Skills/skills/auth-and-access-control/SKILL.md and
+Production-Readiness-Agent-Skills/skills/api-abuse-and-rate-limits/SKILL.md when writing or
+reviewing endpoints.
 Every endpoint that accepts an ID must scope the query to the authenticated user.
 ```
 
@@ -107,13 +145,13 @@ Most now read `AGENTS.md` at the repo root, and several also support their own r
 directory (`.windsurfrules`, `.clinerules/`). The lowest-common-denominator setup:
 
 ```bash
-cp -r preflight /path/to/your-project/
+cp -r Production-Readiness-Agent-Skills /path/to/your-project/
 cat >> AGENTS.md <<'EOF'
 
 ## Pre-production review
 
 Before any deploy, launch, or production-readiness question, read
-`preflight/skills/preflight-audit/SKILL.md` and follow it.
+`Production-Readiness-Agent-Skills/skills/preflight-audit/SKILL.md` and follow it.
 
 Every finding needs a file:line reference and an honest confidence label. Detect and fix —
 never write proof-of-concept exploits. Never claim the app is secure or legally compliant.
