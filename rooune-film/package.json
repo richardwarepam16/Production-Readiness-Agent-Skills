@@ -1,0 +1,20 @@
+{
+  "name": "rooune-film",
+  "version": "1.0.0",
+  "description": "ROOUNE — You have probably already run past them. 19.5s motion film, rendered from code.",
+  "scripts": {
+    "cues": "node src/render.mjs cues out/cues.json",
+    "audio": "python3 src/audio.py out/cues.json out/score.wav",
+    "video": "node src/render.mjs video out/silent.mp4",
+    "build": "bash build.sh"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/inter-tight": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "playwright": "^1.56.1"
+  },
+  "private": true
+}
